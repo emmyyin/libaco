@@ -2,5 +2,7 @@
 #include <ctime>
 
 namespace Util {
-  unsigned int random_number(unsigned int range=RAND_MAX);
+  unsigned int random_number(unsigned int);
 }
+
+extern bool seed_flag;

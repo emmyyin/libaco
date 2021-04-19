@@ -6,6 +6,7 @@
 #include <csignal>
 #include <tclap/CmdLine.h>
 #include <acotsp/tsp.h>
+#include <libaco/util.h>
 
 enum StagnationMeasureType { STAG_NONE, STAG_VARIATION_COEFFICIENT, STAG_LAMBDA_BRANCHING_FACTOR };
 
@@ -17,6 +18,8 @@ static double beta = 1.0;
 static double rho = 0.1;
 static double q = 1.0;
 static double initial_pheromone = -1.0;
+static double seed;
+bool seed_flag = false;
 static bool print_tour_flag = false;
 static bool hide_iteration_flag = false;
 static bool stag_variance_flag = false;
@@ -49,6 +52,7 @@ static void parse_options(int argc, char *argv[]) {
   TCLAP::ValueArg<double> rho_arg("r", "rho", "pheromone trail evaporation rate", false, rho, "double");
   TCLAP::ValueArg<double> q_arg("q", "q", "Q parameter, weight of pheromone update", false, q, "double");
   TCLAP::ValueArg<double> initial_pheromone_arg("p", "pheromone", "initial pheromone value", false, initial_pheromone, "double");
+  TCLAP::ValueArg<double> seed_arg("s", "seed", "set seed", false, seed, "double");
   std::vector<unsigned int> allowed;
   allowed.push_back(0);
   allowed.push_back(1);
@@ -81,6 +85,7 @@ static void parse_options(int argc, char *argv[]) {
   cmd.add(rho_arg);
   cmd.add(q_arg);
   cmd.add(initial_pheromone_arg);
+  cmd.add(seed_arg);
   cmd.add(filepath_arg);
   cmd.add(print_tour_arg);
   cmd.add(hide_iteration_arg);
@@ -122,6 +127,11 @@ static void parse_options(int argc, char *argv[]) {
     stagnation_measure = STAG_VARIATION_COEFFICIENT;
   } else if(stag_lambda_arg.isSet()) {
     stagnation_measure = STAG_LAMBDA_BRANCHING_FACTOR;
+  }
+
+  seed_flag = seed_arg.isSet();
+  if (seed_flag){
+    srand(seed_arg.getValue());
   }
 }
 
