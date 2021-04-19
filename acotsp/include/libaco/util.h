@@ -5,4 +5,4 @@ namespace Util {
   unsigned int random_number(unsigned int);
 }
 
-extern bool seed_flag;
+extern bool seed_flag = false;

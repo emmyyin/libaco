@@ -24,6 +24,8 @@ static bool rank_as_flag = false;
 static bool maxmin_as_flag = false;
 static bool acs_as_flag = false;
 
+bool seed_flag = false;
+
 static double elitist_weight = 2.0;
 static unsigned int ranked_ants = 1;
 
