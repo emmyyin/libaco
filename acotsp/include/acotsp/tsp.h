@@ -57,4 +57,3 @@ struct city {
   double coord_x;
   double coord_y;
 };
-

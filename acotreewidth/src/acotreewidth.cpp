@@ -31,6 +31,8 @@ static bool maxmin_as_flag = false;
 static bool acs_as_flag = false;
 static AntColonyConfiguration::LocalSearchType local_search = AntColonyConfiguration::LS_NONE;
 
+bool seed_flag = false;
+
 static double elitist_weight = 2.0;
 static unsigned int ranked_ants = 1;
 
@@ -157,7 +159,7 @@ static void parse_options(int argc, char *argv[]) {
 
   iteratedls_it = iteratedls_it_arg.getValue();
   iteratedls_ls_it = iteratedls_ls_it_arg.getValue();
-  
+
   if(iteratedls_arg.isSet()) {
     ls_type = ITERATED_LS;
   } else if(hillclimbing_arg.isSet()) {
